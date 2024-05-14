@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="homesty.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="cont1">
+            <img class="todo" src="images\todo.png" alt="todo">
+            <ul class="side">
+                <li><img src="images\bag-check-fill.svg" class="check">Tasks</li><br>
+                <li><img src="images\folder.svg" class="folder"><select name="cat" id="cat">
+                    <option class="catt">Categories</option>
+                    <option class="none">None</option>
+                    <option class="home">Home</option>
+                    <option class="school">School</option>
+                    <option class="shop">Shopping list</option>
+                    
+                </select> </li><br>
+                <li><img src="images\gear.svg" class="Settings">Settings</li>
+            </ul>
+        </div>
+        <div class="cont2">
+            <h1 class="all">All your tasks</h1>
+            <div class="line">
+                <ul class="nav"><div class="cir"></div>
+                    <li class="task"><h2>Tasks</h2></li>
+                    <li><button class="filter">All</button></li>
+                    <li><button class="filter">Done</button></li>
+                    <li><button class="filter">Not done</button></li>
+                    <li><img class="filter" src="images\funnel-fill.svg" alt="funnel"></li>
+                </ul>
+            </div>
+           
+            <ul id="list-container">
+                <!-- Tasks will be added here -->
+            </ul>
+
+            <div class="add">
+                <button onclick="openPopup()" id="add-btn"><img src="images\file-plus.svg" alt="plus" height="15px" width="20px" class="plus"> Add a task</button>
+            </div>
+        </div>
+    </div>
+    <div id="popup" >
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Add Task</h2><br>
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName"><br><br>
+            <label for="category">Category:</label>
+            <select id="category">
+            <option name="none" id="none">None</option>
+            <option name="home" id="home">Home</option>
+            <option name="school" id="school">School</option>
+            <option name="school" id="shop">Shopping List</option>
+
+            </select>
+            
+            <br><br>
+            <button onclick="addTask()">Add Task</button>
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            var taskName = document.getElementById("taskName").value;
+            var category = document.getElementById("category").value;
+
+            if (taskName.trim() === "" || category.trim() === "") {
+                alert("Please enter both task name and category.");
+                return;
+            }
+
+            var listContainer = document.getElementById("list-container");
+            var listItem = document.createElement("p");
+            listItem.innerHTML = `
+                <div class="checkcont">
+                    <input type="radio" name="radio" class="radio">
+                    <div class="side">
+                        <label for="input" class="inptask">${taskName}</label>
+                        <div class="part1">
+                            <div class="color"></div>
+                            <div id="cat">${category}</div>
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <div class="edit"><button onclick="editTask(event)"><img class="pen" src="images/pencil-fill.svg" alt="edit" height="20px" width="20px"></button></div>
+                        <div class="del"><button onclick="deleteItem(event)"><img class="fill" src="images/trash3-fill.svg" alt="del" height="20px" width="20px"></button></div>
+                    </div>
+                </div>`;
+            listContainer.appendChild(listItem);
+            closePopup();
+        }
+
+        function openPopup() {
+    console.log("Popup opened"); // Add this line for debugging
+    var popup = document.getElementById("popup");
+    popup.style.display = "block";
+}
+
+
+        function closePopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "none";
+        }
+        function editTask(event) {
+        var label = event.target.parentElement.parentElement.previousElementSibling.children[0];
+        var currentTaskName = label.innerText;
+        label.innerHTML = `<input type="text" class="edit-task" value="${currentTaskName}">`;
+        label.firstChild.focus();
+        // Add event listener to input field to save the edited task name
+        label.firstChild.addEventListener("blur", function() {
+            var newTaskName = label.firstChild.value;
+            label.innerHTML = newTaskName;
+        });
+    }
+
+        function deleteItem(event) {
+            event.target.parentElement.parentElement.parentElement.parentElement.remove();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+
+body{
+margin: 0px;
+padding: 0px;
+}
+.main{
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.cont1{
+background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+padding: 20px 75px;
+height: 555px;
+}
+.cont2{
+border: 1px solid white;
+padding: 9% 120px ;
+height: 555px;
+}
+.purp{
+    height:500px ;
+    width: 500px;
+    filter: grayscale(100%) brightness(1000%);
+    transform: translateX(30px) translateY(30px);
+}
+.Signin{
+    width: 106%;
+    background:linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+#mail,#pwd{
+    padding:7px ;
+    width: 100%;
+}
+.pls{
+    color: grey;
+    font-size: 15px;
+}
+.acnt{
+    color: grey;
+}
+.acnt a{
+    color: var(--main-clr);
+    text-decoration: none;
+}
